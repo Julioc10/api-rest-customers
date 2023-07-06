@@ -1,0 +1,13 @@
+version: '3.1'
+services:
+  mysql:
+    image: mysql
+    ports: 
+      - 3306:3306
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: db_customers
+      MYSQL_USER: julio
+      MYSQL_PASSWORD: customers
