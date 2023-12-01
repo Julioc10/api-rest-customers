@@ -1,4 +1,4 @@
-#!/Users/juliooliveira/Downloads/test/venv/bin/python3
+#!/home/julio/api-rest-customers/venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys

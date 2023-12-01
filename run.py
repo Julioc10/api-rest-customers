@@ -8,16 +8,23 @@ from marshmallow import Schema, fields, validate
 import os
 from dotenv import load_dotenv
 import uuid
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
 
 pymysql.install_as_MySQLdb()
 load_dotenv()
 
-db = SQLAlchemy()
+# db = SQLAlchemy()
+# app = Flask(__name__)
+# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('MYSQL_URL')
+# app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+# db.init_app(app)
+# CORS(app)
+
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('MYSQL_URL')
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
-db.init_app(app)
-CORS(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///mydatabase.db'
+db = SQLAlchemy(app)
 
 class Customers(db.Model):
     guid = db.Column(db.String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
@@ -120,6 +127,8 @@ def deletar_cliente(guid):
     db.session.commit()
 
     return jsonify({"mensagem": "Cliente removido com sucesso!"}), status.HTTP_200_OK
+
+logging.debug("Mensagem de log aqui.")
 
 
 if __name__ == "__main__":
